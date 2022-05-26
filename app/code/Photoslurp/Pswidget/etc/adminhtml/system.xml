@@ -1,0 +1,70 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="photoslurp_tab" translate="label" sortOrder="1000">
+            <label>Photoslurp</label>
+        </tab>
+        <section id="export_section" translate="label" type="text" sortOrder="100" showInDefault="1">
+            <label>Export</label>
+            <tab>photoslurp_tab</tab>
+            <resource>Photoslurp_Pswidget::config</resource>
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1">
+                <label>Export Settings</label>
+                <field id="stores" translate="label" type="multiselect" sortOrder="10" showInDefault="1">
+                    <label>Stores</label>
+                    <source_model>Photoslurp\Pswidget\Model\Config\Source\Stores</source_model>
+                </field>
+                <!--<field id="mode" translate="label" type="select" sortOrder="10" showInDefault="1">-->
+                    <!--<label>Export Mode</label>-->
+                    <!--<source_model>Photoslurp\Pswidget\Model\Config\Source\Mode</source_model>-->
+                <!--</field>-->
+                <field id="feeds" translate="label" type="select" sortOrder="20" showInDefault="1">
+                    <label>Export one product feed per store</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="cron" translate="label" type="select" sortOrder="20" showInDefault="1">
+                    <label>Auto export</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="path" translate="label" type="text" sortOrder="30" showInDefault="1">
+                    <label>Path</label>
+                    <comment>Export path. Example: path/to/file.csv</comment>
+                </field>
+            </group>
+        </section>
+        <section id="tracking_section" translate="label" type="text" sortOrder="100" showInDefault="1">
+            <label>Order Tracking</label>
+            <tab>photoslurp_tab</tab>
+            <resource>Photoslurp_Pswidget::config</resource>
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1">
+                <label>Order Tracking Settings</label>
+                <field id="tracking_enable" translate="label" type="select" sortOrder="10" showInDefault="1">
+                <label>Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="campaign_id" translate="label" type="text" sortOrder="15" showInDefault="1">
+                    <label>Campaign ID</label>
+                    <comment>Please enter the campaign ID of your main campaign. This is used for our conversion tracking pixel </comment>
+                </field>
+                <field id="log_enable" translate="label" type="select" sortOrder="20" showInDefault="1">
+                    <label>Debug Log</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+        </section>
+        <section id="clicknshopit_section" translate="label" type="text" sortOrder="150" showInDefault="1">
+            <label>Clicknshop.it</label>
+            <tab>photoslurp_tab</tab>
+            <resource>Photoslurp_Pswidget::config</resource>
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1">
+                <label>Clicknshop.it</label>
+                <field id="clicknshopit_enable" translate="label" type="select" sortOrder="10" showInDefault="1">
+                    <label>Add Clicknshopit analytics</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>This option will add an analytics tracking code to all pages of your site,
+                        allowing you to track conversions from Clicknshop.it
+                        regardless of the types of pages you are linking your photos to.</comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

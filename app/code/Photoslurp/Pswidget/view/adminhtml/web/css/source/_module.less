@@ -1,0 +1,12 @@
+@photoslurp-icons-admin__font-name-path: '../../fonts/photoslurp/icomoon';
+@photoslurp-icons-admin__font-name : 'Photoslurp';
+.lib-font-face(
+  @family-name:@photoslurp-icons-admin__font-name,
+  @font-path: @photoslurp-icons-admin__font-name-path,
+  @font-weight: normal,
+  @font-style: normal
+);
+.admin__menu #menu-photoslurp-base.parent.level-0 > a:before {
+  font-family: @photoslurp-icons-admin__font-name;
+  content: "\e900";
+}

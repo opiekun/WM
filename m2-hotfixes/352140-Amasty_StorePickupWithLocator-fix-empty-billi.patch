@@ -1,0 +1,33 @@
+diff --git a/vendor/amasty/module-store-pickup-with-locator/view/frontend/requirejs-config.js b/vendor/amasty/module-store-pickup-with-locator/view/frontend/requirejs-config.js
+index 6c80b84..919da67 100644
+--- a/vendor/amasty/module-store-pickup-with-locator/view/frontend/requirejs-config.js
++++ b/vendor/amasty/module-store-pickup-with-locator/view/frontend/requirejs-config.js
+@@ -18,6 +18,9 @@ var config = {
+             'Magento_Checkout/js/model/shipping-save-processor/payload-extender': {
+                 'Amasty_StorePickupWithLocator/js/model/shipping-save-processor/payload-extender-mixin': true
+             },
++            'WeSupply_Toolbox/js/estimations/model/shipping-save-processor/payload-extender': {
++                'Amasty_StorePickupWithLocator/js/model/shipping-save-processor/payload-extender-mixin': true
++            },
+             'Magento_Checkout/js/view/shipping-address/list': {
+                 'Amasty_StorePickupWithLocator/js/view/shipping-address/list-mixin': true
+             },
+diff --git a/vendor/amasty/module-store-pickup-with-locator/view/frontend/web/js/action/select-billing-address-mixin.js b/vendor/amasty/module-store-pickup-with-locator/view/frontend/web/js/action/select-billing-address-mixin.js
+index 1265812..0db7ec8 100644
+--- a/vendor/amasty/module-store-pickup-with-locator/view/frontend/web/js/action/select-billing-address-mixin.js
++++ b/vendor/amasty/module-store-pickup-with-locator/view/frontend/web/js/action/select-billing-address-mixin.js
+@@ -8,7 +8,10 @@ define([
+      */
+     return function (selectBillingAddressAction) {
+         return wrapper.wrap(selectBillingAddressAction, function (original, address) {
+-            if (address.getType() !== 'store-pickup-address') {
++            if ((address.getType() !== 'store-pickup-address')
++                && !_.isEmpty(_.pick(_.omit(address, _.isEmpty), function (value, key, object) {
++                    return key !== 'countryId';
++                }))) {
+                 original(address);
+             }
+         });
+-- 
+2.25.1
+

@@ -1,0 +1,1 @@
+Copy company to shipping and billing addresses on checkout. Somehow that wasn't working by default.

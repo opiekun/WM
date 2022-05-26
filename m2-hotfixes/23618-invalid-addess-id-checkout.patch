@@ -1,0 +1,15 @@
+diff --git a/vendor/magento/module-quote/Model/Quote.php b/vendor/magento/module-quote/Model/Quote.php
+index d2e9001..e1b15f1 100644
+--- a/vendor/magento/module-quote/Model/Quote.php
++++ b/vendor/magento/module-quote/Model/Quote.php
+@@ -854,8 +854,9 @@ class Quote extends AbstractExtensibleModel implements \Magento\Quote\Api\Data\C
+             $this->setIsChanged(0);
+         }
+
+-        if ($this->_customer) {
++        if ($this->_customer && $this->_customer->getId()) {
+             $this->setCustomerId($this->_customer->getId());
++            $this->setCustomerIsGuest(false);
+         }
+
+         //mark quote if it has virtual products only

@@ -1,0 +1,18 @@
+Index: Plugin/Catalog/Product/Label.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/vendor/amasty/label/Plugin/Catalog/Product/Label.php b/vendor/amasty/label/Plugin/Catalog/Product/Label.php
+--- a/vendor/amasty/label/Plugin/Catalog/Product/Label.php	(revision 971dc08658d9d0bc8581f2c72d79bb46da77c7d1)
++++ b/vendor/amasty/label/Plugin/Catalog/Product/Label.php	(date 1645436978883)
+@@ -54,7 +54,8 @@
+     ) {
+         $product = $subject->getProduct();
+         $moduleName = $this->request->getModuleName();
+-        if ($product && !in_array($moduleName, static::IGNORING_MODULE_NAMES)) {
++        if ($product && !in_array($moduleName, static::IGNORING_MODULE_NAMES)
++            && !$product->getData('exclude_amlabel')) {
+             $result .= $this->helper->renderProductLabel($product);
+             $this->registry->register('amlabel_category_observer', true, true);
+         }

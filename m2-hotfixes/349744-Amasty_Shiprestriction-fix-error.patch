@@ -1,0 +1,16 @@
+diff --git a/vendor/amasty/shiprestriction/Model/RestrictRatesPerCarrier.php b/vendor/amasty/shiprestriction/Model/RestrictRatesPerCarrier.php
+index 89fba69..f752607 100644
+--- a/vendor/amasty/shiprestriction/Model/RestrictRatesPerCarrier.php
++++ b/vendor/amasty/shiprestriction/Model/RestrictRatesPerCarrier.php
+@@ -72,7 +72,7 @@ class RestrictRatesPerCarrier
+         return $rule->getShowRestrictionMessage() ? $rule->getCustomRestrictionMessage() : null;
+     }
+ 
+-    private function appendError(CarrierResult $result, Method $rate, string $errorMessage): void
++    private function appendError(CarrierResult $result, $rate, string $errorMessage): void
+     {
+         /** @var Error $error */
+         $error = $this->rateErrorFactory->create();
+-- 
+2.25.1
+

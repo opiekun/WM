@@ -1,0 +1,28 @@
+diff --git a/vendor/amasty/module-one-step-checkout-core/view/frontend/web/js/model/shipping-registry.js b/vendor/amasty/module-one-step-checkout-core/view/frontend/web/js/model/shipping-registry.js
+index ab26884..460de22 100644
+--- a/vendor/amasty/module-one-step-checkout-core/view/frontend/web/js/model/shipping-registry.js
++++ b/vendor/amasty/module-one-step-checkout-core/view/frontend/web/js/model/shipping-registry.js
+@@ -239,7 +239,7 @@ define([
+             clearTimeout(this.validationTimeout);
+
+             if (!formPopUpState.isVisible() && !addressFormState.isShippingFormVisible()) {
+-                paymentLoader(true);
++                //paymentLoader(true);
+
+                 this.validationTimeout = setTimeout(this.validation.bind(this), this.checkDelay);
+             }
+diff --git a/vendor/amasty/module-one-step-checkout-core/view/frontend/web/js/view/shipping-mixin.js b/vendor/amasty/module-one-step-checkout-core/view/frontend/web/js/view/shipping-mixin.js
+index c19ecc9..9807075 100644
+--- a/vendor/amasty/module-one-step-checkout-core/view/frontend/web/js/view/shipping-mixin.js
++++ b/vendor/amasty/module-one-step-checkout-core/view/frontend/web/js/view/shipping-mixin.js
+@@ -416,7 +416,7 @@ define(
+                     // allowedDynamicalValidation - for avoid circular dependency
+                     if (this.allowedDynamicalValidation) {
+                         this.allowedDynamicalSave = false;
+-                        isShippingValid = this.validateShippingInformation();
++                        //isShippingValid = this.validateShippingInformation();
+                         this.allowedDynamicalSave = true;
+                     }
+
+--
+2.25.1

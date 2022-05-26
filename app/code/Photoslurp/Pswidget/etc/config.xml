@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <tracking_section>
+            <general>
+                <tracking_enable>1</tracking_enable>
+            </general>
+        </tracking_section>
+    </default>
+</config>

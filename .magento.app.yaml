@@ -1,0 +1,162 @@
+# This file describes an application. You can have multiple applications
+# in the same project.
+
+# The name of this app. Must be unique within a project.
+name: mymagento
+
+# The toolstack used to build the application.
+type: php:7.4
+build:
+  flavor: composer
+
+# Enable extensions required by Magento 2
+runtime:
+  extensions:
+    - xsl
+    - json
+    - newrelic
+    - sodium
+
+# The relationships of the application with services or other applications.
+# The left-hand side is the name of the relationship as it will be exposed
+# to the application in the environment variable. The right-hand
+# side is in the form `<service name>:<endpoint name>`.
+relationships:
+  database: "mysql:mysql"
+  redis: "redis:redis"
+  elasticsearch: "elasticsearch:elasticsearch"
+
+# The configuration of app when it is exposed to the web.
+web:
+  locations:
+    "/":
+      # The public directory of the app, relative to its root.
+      root: "pub"
+      # The front-controller script to send non-static requests to.
+      passthru: "/index.php"
+      index:
+        - index.php
+      expires: -1
+      scripts: true
+      allow: false
+      rules:
+        \.(css|js|map|hbs|gif|jpe?g|png|tiff|wbmp|ico|jng|bmp|svgz|midi?|mp?ga|mp2|mp3|m4a|ra|weba|3gpp?|mp4|mpe?g|mpe|ogv|mov|webm|flv|mng|asx|asf|wmv|avi|ogx|swf|jar|ttf|eot|woff|otf|html?)$:
+          allow: true
+        ^/sitemap(.*)\.xml$:
+          passthru: "/media/sitemap$1.xml"
+    "/media":
+      root: "pub/media"
+      allow: true
+      scripts: false
+      expires: 1y
+      passthru: "/get.php"
+    "/static":
+      root: "pub/static"
+      allow: true
+      scripts: false
+      expires: 1y
+      passthru: "/front-static.php"
+      rules:
+        ^/static/version\d+/(?<resource>.*)$:
+          passthru: "/static/$resource"
+
+# The size of the persistent disk of the application (in MB).
+disk: 5120
+
+# The mounts that will be performed when the package is deployed.
+mounts:
+  "var": "shared:files/var"
+  "app/etc": "shared:files/etc"
+  "pub/media": "shared:files/media"
+  "pub/static": "shared:files/static"
+
+hooks:
+  # We run build hooks before your application has been packaged.
+  build: |
+    set -e
+    php ./vendor/bin/ece-tools run scenario/build/generate.xml
+    php ./vendor/bin/ece-tools run scenario/build/transfer.xml
+  # We run deploy hook after your application has been deployed and started.
+  deploy: |
+    php ./vendor/bin/ece-tools run scenario/deploy.xml
+  # We run post deploy hook to clean and warm the cache. Available with ECE-Tools 2002.0.10.
+  post_deploy: |
+    php ./vendor/bin/ece-tools run scenario/post-deploy.xml
+
+# Default Magento 2 cron jobs
+crons:
+  cronrun:
+    spec: "* * * * *"
+    cmd: "php bin/magento cron:run"
+  cron_perfion_purge:
+    spec: "0 5 * * *"
+    cmd: "php bin/magento perfion:purge"
+  cron_westmusicstore_attribute_fullimport:
+    spec: "0 6 * * *"
+    cmd: "php bin/magento perfion:fetch westmusicstore_attribute"
+  cron_westmusicstore_category_fullimport:
+    spec: "5 6 * * *"
+    cmd: "php bin/magento perfion:fetch westmusicstore_category"
+  cron_westmusicstore_product_fullimport:
+    spec: "10 6 * * *"
+    cmd: "php bin/magento perfion:fetch westmusicstore_product"
+  cron_percussionsourcestore_attribute_fullimport:
+    spec: "15 6 * * *"
+    cmd: "php bin/magento perfion:fetch percussionsourcestore_attribute"
+  cron_percussionsourcestore_category_fullimport:
+    spec: "20 6 * * *"
+    cmd: "php bin/magento perfion:fetch percussionsourcestore_category"
+  cron_percussionsourcestore_product_fullimport:
+    spec: "25 6 * * *"
+    cmd: "php bin/magento perfion:fetch percussionsourcestore_product"
+  cron_fullimport_process:
+    spec: "30 6 * * *"
+    cmd: "php bin/magento perfion:process"
+  cron_westmusicstore_attribute_incremental_1:
+    spec: "0 11-23 * * *"
+    cmd: "php bin/magento perfion:fetch westmusicstore_attribute_incremental"
+  cron_westmusicstore_category_incremental_1:
+    spec: "5 11-23 * * *"
+    cmd: "php bin/magento perfion:fetch westmusicstore_category_incremental"
+  cron_westmusicstore_product_incremental_1:
+    spec: "10 11-23 * * *"
+    cmd: "php bin/magento perfion:fetch westmusicstore_product_incremental"
+  cron_percussionsourcestore_attribute_incremental_1:
+    spec: "15 11-23 * * *"
+    cmd: "php bin/magento perfion:fetch percussionsourcestore_attribute_incremental"
+  cron_percussionsourcestore_category_incremental_1:
+    spec: "20 11-23 * * *"
+    cmd: "php bin/magento perfion:fetch percussionsourcestore_category_incremental"
+  cron_percussionsourcestore_product_incremental_1:
+    spec: "25 11-23 * * *"
+    cmd: "php bin/magento perfion:fetch percussionsourcestore_product_incremental"
+  cron_incremental_process_1:
+    spec: "30 11-23 * * *"
+    cmd: "php bin/magento perfion:process"
+  cron_westmusicstore_attribute_incremental_2:
+    spec: "0 0-3 * * *"
+    cmd: "php bin/magento perfion:fetch westmusicstore_attribute_incremental"
+  cron_westmusicstore_category_incremental_2:
+    spec: "5 0-3 * * *"
+    cmd: "php bin/magento perfion:fetch westmusicstore_category_incremental"
+  cron_westmusicstore_product_incremental_2:
+    spec: "10 0-3 * * *"
+    cmd: "php bin/magento perfion:fetch westmusicstore_product_incremental"
+  cron_percussionsourcestore_attribute_incremental_2:
+    spec: "15 0-3 * * *"
+    cmd: "php bin/magento perfion:fetch percussionsourcestore_attribute_incremental"
+  cron_percussionsourcestore_category_incremental_2:
+    spec: "20 0-3 * * *"
+    cmd: "php bin/magento perfion:fetch percussionsourcestore_category_incremental"
+  cron_percussionsourcestore_product_incremental_2:
+    spec: "25 0-3 * * *"
+    cmd: "php bin/magento perfion:fetch percussionsourcestore_product_incremental"
+  cron_incremental_process_2:
+    spec: "30 0-3 * * *"
+    cmd: "php bin/magento perfion:process"
+
+# Environment variables
+variables:
+  env:
+    CONFIG__DEFAULT__PAYPAL_ONBOARDING__MIDDLEMAN_DOMAIN: 'payment-broker.magento.com'
+    CONFIG__STORES__DEFAULT__PAYPAL__NOTATION_CODE: 'Magento_Enterprise_Cloud'

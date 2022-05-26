@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2015 Photoslurp. All rights reserved.
+ */
+-->
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="left">
+            <block class="Photoslurp\Pswidget\Block\Adminhtml\Items\Edit\Tabs" name="photoslurp_pswidget_items_edit_tabs">
+                <block class="Photoslurp\Pswidget\Block\Adminhtml\Items\Edit\Tab\Main" name="photoslurp_pswidget_items_edit_tab_main"/>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">main_section</argument>
+                    <argument name="block" xsi:type="string">photoslurp_pswidget_items_edit_tab_main</argument>
+                </action>
+                <block class="Photoslurp\Pswidget\Block\Adminhtml\Items\Edit\Tab\Style" name="photoslurp_pswidget_items_edit_tab_style"/>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">style</argument>
+                    <argument name="block" xsi:type="string">photoslurp_pswidget_items_edit_tab_style</argument>
+                </action>
+            </block>
+        </referenceContainer>
+        <referenceContainer name="content">
+            <block class="Photoslurp\Pswidget\Block\Adminhtml\Items\Edit" name="pswidget_items_edit"/>
+        </referenceContainer>
+    </body>
+</page>

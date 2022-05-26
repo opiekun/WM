@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2015 Photoslurp. All rights reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="photoslurp::base" title="Photoslurp" module="Photoslurp_Pswidget" sortOrder="90" resource="Photoslurp_Pswidget::sample"/>
+        <add id="photoslurp_pswidget::pswidget" title="Widgets" module="Photoslurp_Pswidget" sortOrder="10" parent="photoslurp::base" action="photoslurp_pswidget/items/" resource="Photoslurp_Pswidget::items"/>
+        <add id="photoslurp_pswidget::export" title="Export" module="Photoslurp_Pswidget" sortOrder="10" parent="photoslurp::base" action="photoslurp_pswidget/export/" resource="Photoslurp_Pswidget::export"/>
+
+    </menu>
+</config>

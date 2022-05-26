@@ -1,0 +1,19 @@
+<?php $widget = $this->getWidget(); ?>
+<?php if($widget->getWidgetEnable()): ?>
+    <?php if($widget->getCss()):?>
+    <link rel="stylesheet" data-photoslurp-css-id="<?php echo $this->getContainerId() ?>" href="<?php echo $this->getCssUrl() ?>">
+   <?php endif; ?>
+    <div id="<?php echo $this->getContainerId() ?>" style="clear:both" class="ps-container">
+        <ps-widget data-config="<?php echo $widget->getWidgetId() ?>"></ps-widget>
+        <script>
+            window.photoSlurpWidgetSettings = window.photoSlurpWidgetSettings || {};
+            photoSlurpWidgetSettings['<?php echo $widget->getWidgetId() ?>'] =  <?php echo $this->getJson() ?>;
+        </script>
+        <script src="//static.photoslurp.com/widget/v3/loader.js" async></script>
+        <?php $isProductPage = ($this->getRequest()->getFullActionName() == 'catalog_product_view'); ?>
+        <a href="//hi.photoslurp.com/partners/<?php echo $this->getUserName(); ?>?utm_source=referral&utm_medium=powered-by-photoslurp" target="_blank" class="ps-poweredby-link"
+           title="Powered by Photoslurp" <?php if($isProductPage): ?>rel="nofollow"<?php endif;?>>
+            <div class="ps-logo-widget-carousel"></div>
+        </a>
+    </div>
+<?php endif; ?>

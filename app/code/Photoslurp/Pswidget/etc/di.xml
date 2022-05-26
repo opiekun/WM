@@ -1,0 +1,15 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <virtualType name="psLogger" type="Magento\Framework\Logger\Monolog">
+        <arguments>
+            <argument name="handlers"  xsi:type="array">
+                <item name="debug" xsi:type="object">Photoslurp\Pswidget\Logger\Debug</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Photoslurp\Pswidget\Observer\Conversion">
+        <arguments>
+            <argument name="logger" xsi:type="object">psLogger</argument>
+        </arguments>
+    </type>
+</config>

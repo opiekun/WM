@@ -1,0 +1,21 @@
+<form action="<?php echo $this->getUrl('photoslurp_pswidget/export/exportAction')?>" method="get">
+    <div class="row row-gutter">
+        <div class="col-xs-2">
+            <button type="submit"><?php echo __('Export'); ?></button>
+        </div>
+        <div class="col-xs-10">
+            <?php if($this->getDownloadLink()): ?>
+                Access Link: <a href="<?php echo $this->getDownloadLink(); ?>"><?php echo $this->getDownloadLink(); ?></a>
+            <?php endif; ?>
+        </div>
+    </div>
+    <div class="row row-gutter">
+        <div class="col-xs-12">
+            <br>
+            <a href="<?php echo $this->getConfigUrl() ?>"><?php echo __('Click here to change export settings'); ?></a>
+        </div>
+    </div>
+</form>
+
+
+
